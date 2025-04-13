@@ -12,7 +12,7 @@ public class ExtentReportManager {
     // Initialize the report
     public static void initReports(String reportPath, String testName) {
         if (extent == null) {
-            ExtentSparkReporter spark = new ExtentSparkReporter("test-output/ExtentReport.html");
+            ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
             spark.config().setDocumentTitle(testName);
             spark.config().setReportName(reportPath);
             extent = new ExtentReports();
