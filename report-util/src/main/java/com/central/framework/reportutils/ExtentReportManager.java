@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
+
 public class ExtentReportManager {
 
     private static ExtentReports extent;
@@ -14,7 +15,7 @@ public class ExtentReportManager {
         if (extent == null) {
             ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
             spark.config().setDocumentTitle(testName);
-            spark.config().setReportName(reportPath);
+            spark.config().setReportName(testName);
             extent = new ExtentReports();
             extent.attachReporter(spark);
             extent.setSystemInfo("Framework", "TestNG");
@@ -40,11 +41,29 @@ public class ExtentReportManager {
 
     // Get the current thread's test
     public static ExtentTest getTest() {
+        if (extentTest.get() == null) {
+            throw new IllegalStateException("ExtentTest is not initialized for this thread.");
+        }
         return extentTest.get();
     }
-
     // Remove test from thread-local (optional cleanup)
     public static void unload() {
         extentTest.remove();
+    }
+
+    public static void addAuthor(String author) {
+        getTest().assignAuthor(author);
+    }
+
+    public static void addCategory(String category) {
+        getTest().assignCategory(category);
+    }
+
+    public static void addScreenshot(String base64Screenshot, String title) {
+        getTest().addScreenCaptureFromBase64String(base64Screenshot, title);
+    }
+
+    public static void addScreenshotFromPath(String path, String title) {
+        getTest().addScreenCaptureFromPath(path, title);
     }
 }
