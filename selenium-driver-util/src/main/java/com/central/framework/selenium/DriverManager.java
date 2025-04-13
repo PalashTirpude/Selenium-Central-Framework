@@ -17,6 +17,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 
 @Setter
 @Slf4j
@@ -70,8 +71,10 @@ public class DriverManager {
                 "--disable-restore-session-state",
                 "--disable-infobars",
                 "--disable-extensions",
-                "--disable-gpu.",
-                "--disable-save-password-bubble"};
+                "--disable-gpu",
+                "--disable-save-password-bubble",
+                "--user-data-dir=" + System.getProperty("java.io.tmpdir") + "/EdgeProfile_" + UUID.randomUUID()
+        };
     }
 
     private Map<String, Object> getPreferences() {
