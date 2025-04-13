@@ -72,8 +72,7 @@ public class DriverManager {
                 "--disable-infobars",
                 "--disable-extensions",
                 "--disable-gpu",
-                "--disable-save-password-bubble",
-                "--user-data-dir=" + System.getProperty("java.io.tmpdir") + "/EdgeProfile_" + UUID.randomUUID()
+                "--disable-save-password-bubble"
         };
     }
 
