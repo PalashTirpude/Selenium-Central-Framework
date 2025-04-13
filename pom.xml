@@ -13,6 +13,7 @@
         <module>generic-utils</module>
         <module>logging-util</module>
         <module>excel-utils</module>
+        <module>assert-util</module>
     </modules>
 
     <properties>
