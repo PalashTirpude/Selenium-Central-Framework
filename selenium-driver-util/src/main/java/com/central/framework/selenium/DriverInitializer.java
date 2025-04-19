@@ -1,6 +1,5 @@
 package com.central.framework.selenium;
 
-import com.central.framework.genericutils.LoadProperties;
 import com.central.framework.selenium.enums.Browsers;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
