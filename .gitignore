@@ -1,1 +1,8 @@
 /.idea/
+/logging-util/target/
+/assert-util/target/
+/date-util/target/
+/excel-utils/target/
+/generic-utils/target/
+/report-util/target/
+/selenium-driver-util/target/
