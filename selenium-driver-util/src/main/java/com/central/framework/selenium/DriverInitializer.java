@@ -19,7 +19,8 @@ public class DriverInitializer {
         DriverManager driverManager = new DriverManager();
         properties=LoadProperties.fromFile(filePath);
         driverManager.setProperties(properties);
-        WebDriver driver = driverManager.getWebDriver(Optional.of(Browsers.valueOf(browserName)).orElse(Browsers.CHROME));
+        browserName=Optional.ofNullable(browserName).orElse("CHROME");
+        WebDriver driver = driverManager.getWebDriver(Browsers.valueOf(browserName));
         driverThreadLocal.set(driver);
     }
 
