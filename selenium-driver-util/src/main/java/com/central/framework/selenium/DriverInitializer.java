@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Optional;
 import java.util.Properties;
 
 @Slf4j
@@ -18,7 +19,7 @@ public class DriverInitializer {
         DriverManager driverManager = new DriverManager();
         properties=LoadProperties.fromFile(filePath);
         driverManager.setProperties(properties);
-        WebDriver driver = driverManager.getWebDriver(Browsers.valueOf(browserName));
+        WebDriver driver = driverManager.getWebDriver(Optional.of(Browsers.valueOf(browserName)).orElse(Browsers.CHROME));
         driverThreadLocal.set(driver);
     }
 
