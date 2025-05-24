@@ -18,12 +18,26 @@ import java.util.function.Function;
 @UtilityClass
 public class WebDriverActions {
 
+    public static final WebDriver driver=DriverInitializer.getWebDriver();
+
     public WebElement findElement(By locator) {
-        return DriverInitializer.getWebDriver().findElement(locator);
+        return driver.findElement(locator);
     }
 
     public List<WebElement> findElements(By locator) {
-        return DriverInitializer.getWebDriver().findElements(locator);
+        return driver.findElements(locator);
+    }
+
+    public void waitForElementClickableAndClick(By locator){
+        DriverWait.waitElementToBeClickable(locator,5);
+        JavaScriptOperations.scrollToElement(locator);
+        JavaScriptOperations.clickElement(locator);
+    }
+
+    public void waitForElementVisibleAndSendKeys(By locator,String sendKeys){
+        DriverWait.waitVisibilityOfElementLocated(locator,5);
+        JavaScriptOperations.scrollToElement(locator);
+        DriverInitializer.getWebDriver().findElement(locator).sendKeys(sendKeys);
     }
 
     public Select selectByIndex(By locator,int index){
@@ -57,7 +71,7 @@ public class WebDriverActions {
     public Select selectByValue(By locator,String[] values){
         DriverWait.waitVisibilityOfElementLocated(locator,5);
         Select selectObject =new Select(findElement(locator));
-        Arrays.asList(values).forEach(selectObject::selectByVisibleText);
+        Arrays.asList(values).forEach(selectObject::selectByValue);
         return selectObject;
     }
 
@@ -75,18 +89,18 @@ public class WebDriverActions {
         });
     }
 
-    public static void safeSendKeys(By locator, String text) {
+    public void safeSendKeys(By locator, String text) {
         retryOperation(locator, element -> {
             element.sendKeys(text);
             return null;
         });
     }
 
-    public static String safeGetText(By locator) {
+    public String safeGetText(By locator) {
         return retryOperation(locator, WebElement::getText);
     }
 
-    public static String safeGetAttribute(By locator, String attribute) {
+    public String safeGetAttribute(By locator, String attribute) {
         return retryOperation(locator, element -> Objects.requireNonNull(element.getDomAttribute(attribute)));
     }
 
